@@ -1,21 +1,13 @@
-import Card from "@mui/material/Card";
-import CardContent from "@mui/material/CardContent";
-
-import { computeTotals } from "utils";
-import { PropsType } from "./types";
-import { useContext, useMemo } from "react";
-import HighchartsReact from "highcharts-react-official";
-import Highcharts from "highcharts";
 import {
   DashboardTabContext,
   DashboardTabContextType,
 } from "Context/tabSelected";
-
-import Shimmer from "components/Shimmer";
 import { useUserActivityData } from "Hooks/useUserActivityData";
+import { useContext, useMemo } from "react";
 import { initialUserActivityResponseType } from "Slices/FetchUserGithubActivity";
+import { computeTotals } from "utils";
 
-const EventHistory: React.FC<PropsType> = () => {
+export const usePieChartRepresentation = () => {
   const { selectedUser } = useContext(
     DashboardTabContext
   ) as DashboardTabContextType;
@@ -110,18 +102,8 @@ const EventHistory: React.FC<PropsType> = () => {
     [percentages]
   );
 
-  return isLoading ? (
-    <Shimmer height={515} />
-  ) : (
-    <Card
-      sx={{ borderRadius: "8px" }}
-      className={`shimmer-inactive-ctn ${isLoading ? "" : "visible"}`}
-    >
-      <CardContent>
-        <HighchartsReact highcharts={Highcharts} options={chartOptions} />
-      </CardContent>
-    </Card>
-  );
+  return {
+    chartOptions,
+    isLoading,
+  };
 };
-
-export default EventHistory;

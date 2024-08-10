@@ -7,7 +7,9 @@ const ActivityCard = React.lazy(() => import("components/ActivityCard"));
 const UserActivitySummary = React.lazy(
   () => import("components/UserActivitySummary")
 );
-const EventHistory = React.lazy(() => import("components/EventHistory"));
+const PieChartRepresentation = React.lazy(
+  () => import("components/PieChartRepresentation")
+);
 
 const OverviewTabCtn = () => {
   return (
@@ -29,7 +31,7 @@ const OverviewTabCtn = () => {
           <UserActivitySummary />
         </Suspense>
         <Suspense fallback={<Shimmer height={515} />}>
-          <EventHistory />
+          <PieChartRepresentation />
         </Suspense>
       </Box>
       <UserActivityTable />
